@@ -94,13 +94,13 @@ img {
 </head>
 <body>
 
-<h1>Hej test!</h1>
+<h1>Hej...</h1>
 
 <p><?php 
 
 $servername = "localhost";
 $username = "root";
-$password = "oFdsvdf!111";
+$password = "";
 $dbname = "Weather";
 
     $conn = new mysqli($servername, $username, $password, $dbname);
