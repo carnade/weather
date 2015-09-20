@@ -5,7 +5,6 @@
  <body>
 <?php 
 
-//$myfile = fopen("newfile.txt", "w") or die("Unable to open file!");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $postdata = json_decode(file_get_contents("php://input"));
@@ -14,7 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $type = $postdata->{"type"};
     $value = $postdata->{"value"};
     $time = $postdata->{"time"};
-//fwrite($myfile, $loc . $type . $device . $value . $time);
 
 
 
