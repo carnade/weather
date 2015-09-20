@@ -98,6 +98,8 @@ img {
 
 <p><?php 
 
+require 'database.php';
+
 $servername = "localhost";
 $username = "root";
 $password = "";
