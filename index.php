@@ -11,7 +11,7 @@ $path = 'img/';
 
 // End of user modified section 
 /////////////////////////////////////////////////////////////////////
- 
+
 function getImagesFromDir($path) {
     $images = array();
     if ( $img_dir = @opendir($path) ) {
@@ -41,26 +41,26 @@ $img = getRandomFromArray($imgList);
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>Väderdata</title>
-<style type="text/css">
-body { font: 14px/1.3 verdana, arial, helvetica, sans-serif; }
-h1 { font-size:1.3em; }
-h2 { font-size:1.2em; }
-a:link { color:#33c; } 
-a:visited { color:#339; }
-p { max-width: 60em; }
-td { padding: 1px;width: 50px}
+    <meta charset="utf-8" />
+    <title>Väderdata</title>
+    <style type="text/css">
+        body { font: 14px/1.3 verdana, arial, helvetica, sans-serif; }
+        h1 { font-size:1.3em; }
+        h2 { font-size:1.2em; }
+        a:link { color:#33c; } 
+        a:visited { color:#339; }
+        p { max-width: 60em; }
+        td { padding: 1px;width: 50px}
 
-/* so linked image won't have border */
-a img { border:none; }
-img {
-   
- height: auto;
- max-width: 50%;
-} 
+        /* so linked image won't have border */
+        a img { border:none; }
+        img {
 
-    table.table-style-three {
+         height: auto;
+         max-width: 50%;
+     } 
+
+     table.table-style-three {
         font-family: verdana, arial, sans-serif;
         font-size: 11px;
         color: #333333;
@@ -94,53 +94,53 @@ img {
 </head>
 <body>
 
-<h1>Hej...</h1>
+    <h1>Hej...</h1>
 
-<p><?php 
+    <p>
+    <?php
+        require 'database.php';
 
-    require 'database.php';
+        $conn = get_db_connection();
 
-    $conn = get_db_connection();
+        $sql = "SELECT * from data_latest order by type desc";
+        $result = ($conn->query($sql));
 
-    $sql = "SELECT * from data_latest order by type desc";
-    $result = ($conn->query($sql));
-
-    echo "<table><tr><td>";
-    echo "<table class=\"table-style-three\"><thead><tr><th>Typ</th><th>Just nu</th><th>Tidpunkt</th></tr></thead><tbody>";
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $loc = $row["type"]=="temp" ? "Temp" : "Fukt";
-	    echo "<tr>";
-            echo "<td>$loc</td><td>" . $row["value"]/10 . "</td><td>" . $row["time"].  "</td><br>";
-	    echo "</tr>";
+        echo "<table><tr><td>";
+        echo "<table class=\"table-style-three\"><thead><tr><th>Typ</th><th>Just nu</th><th>Tidpunkt</th></tr></thead><tbody>";
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $loc = $row["type"]=="temp" ? "Temp" : "Fukt";
+                echo "<tr>";
+                echo "<td>$loc</td><td>" . $row["value"]/10 . "</td><td>" . $row["time"].  "</td><br>";
+                echo "</tr>";
+            }
+        } else {
+           echo "0 results";
         }
-    } else {
-       echo "0 results";
-    }
-    echo "</tbody></table>";
-    echo "</td><td>";
-    $sql2 = "SELECT d1.type, d1.min1,d1.avg1,d1.max1, d7.min7,d7.avg7,d7.max7, d30.min30, d30.avg30, d30.max30 \n"
-	        . "FROM data1 d1, `data7` d7, data30 d30 WHERE d7.type=d30.type and d7.type = d1.type order by type desc";
+        echo "</tbody></table>";
+        echo "</td><td>";
+        $sql2 = "SELECT d1.type, d1.min1,d1.avg1,d1.max1, d7.min7,d7.avg7,d7.max7, d30.min30, d30.avg30, d30.max30 \n"
+        . "FROM data1 d1, `data7` d7, data30 d30 WHERE d7.type=d30.type and d7.type = d1.type order by type desc";
 
 
-    $result2 = ($conn->query($sql2));
+        $result2 = ($conn->query($sql2));
 
-	    echo "<table class=\"table-style-three\"><thead><tr><th>Typ</th><th>Min1</th><th>Avg1</th><th>Max1</th><th>Min7</th><th>Avg7</th><th>Max7</th><th>Min30</th><th>Avg30</th><th>Max30</th></tr></thead><tbody>";
-    if ($result2->num_rows > 0) {
-        while($row = $result2->fetch_assoc()) {
-            $loc = $row["type"]=="temp" ? "Temp" : "Fukt";
-	    echo "<tr>";
-            echo "<td>$loc</td><td> " . round($row["min1"],2) . "</td><td>" . round($row["avg1"] ,2) . "</td><td> " . round($row["max1"],2) ."</td><td> " . round($row["min7"],2) . "</td><td> " . round($row["avg7"] ,2) . "</td><td> " . round($row["max7"] ,2). "</td><td> "  . round($row["min30"],2) . "</td><td> " . round($row["avg30"],2) . "</td><td> " . round($row["max30"],2). "</td><br>";
+        echo "<table class=\"table-style-three\"><thead><tr><th>Typ</th><th>Min1</th><th>Avg1</th><th>Max1</th><th>Min7</th><th>Avg7</th><th>Max7</th><th>Min30</th><th>Avg30</th><th>Max30</th></tr></thead><tbody>";
+        if ($result2->num_rows > 0) {
+            while($row = $result2->fetch_assoc()) {
+                $loc = $row["type"]=="temp" ? "Temp" : "Fukt";
+                echo "<tr>";
+                echo "<td>$loc</td><td> " . round($row["min1"],2) . "</td><td>" . round($row["avg1"] ,2) . "</td><td> " . round($row["max1"],2) ."</td><td> " . round($row["min7"],2) . "</td><td> " . round($row["avg7"] ,2) . "</td><td> " . round($row["max7"] ,2). "</td><td> "  . round($row["min30"],2) . "</td><td> " . round($row["avg30"],2) . "</td><td> " . round($row["max30"],2). "</td><br>";
 
-            //echo "<td>$loc</td> - min7: " . round($row["min7"],2) . " avg7: " . round($row["avg7"] ,2) . " max7: " . round($row["max7"] ,2). " min30: "  . round($row["min30"],2) . " avg30: " . round($row["avg30"],2) . " max30: " . round($row["max30"],2). "<br>";
-	    echo "</tr>";
+                //echo "<td>$loc</td> - min7: " . round($row["min7"],2) . " avg7: " . round($row["avg7"] ,2) . " max7: " . round($row["max7"] ,2). " min30: "  . round($row["min30"],2) . " avg30: " . round($row["avg30"],2) . " max30: " . round($row["max30"],2). "<br>";
+                echo "</tr>";
+            }
+        } else {
+            echo "0 results";
         }
-    } else {
-       echo "0 results";
-    }
-    echo "</tbody></table>";
-    echo "</td></tr></table>";
-?>
+        echo "</tbody></table>";
+        echo "</td></tr></table>";
+   ?>
 </p>
 
 <!-- image displays here -->
