@@ -16,16 +16,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $time = $postdata->{"time"};
 //fwrite($myfile, $loc . $type . $device . $value . $time);
 
-$servername = "localhost";
-$username = "root";
-$password = "oFdsvdf!111";
-$dbname = "Weather";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
 
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    } 
+    $conn = get_db_connection();
 
     $value*=10;
     $sql = "INSERT into data (location, device, type, value, time)
