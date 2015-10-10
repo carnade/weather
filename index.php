@@ -54,10 +54,10 @@ $img = getRandomFromArray($imgList);
 
         /* so linked image won't have border */
         a img { border:none; }
-        img {
+        img.banner {
 
          height: auto;
-         max-width: 50%;
+         width: auto;
      } 
 
      table.table-style-three {
@@ -93,7 +93,7 @@ $img = getRandomFromArray($imgList);
 </style>
 </head>
 <body>
-
+    <div><img class="banner" src="<?php echo $path . $img ?>" alt="" /></div>
     <h1>Hej...</h1>
 
     <p>
@@ -144,7 +144,7 @@ $img = getRandomFromArray($imgList);
 </p>
 
 <!-- image displays here -->
-<div><img src="<?php echo $path . $img ?>" alt="" /></div>
+
 
 
 <p>&nbsp;</p>
